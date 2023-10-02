@@ -1,34 +1,55 @@
 <template>
     <div>
-      <div class="titleContainer">
-        고고
-
-     
-  
-        <div class="infoContainer">
-      
+      <div class="main-container">
+        <!--<img :src="'/blog/img/icon.png'" 
+        alt="logo"
+        style="width:40px;height:40px"
+        >-->
+          안녕하세요!👋 <br>
+          이 곳은 제가 공부하는 것을 기록/공유하고자 만든 블로그입니다. 🐭
+          <div style="margin-top: 5px">
+            <a class="icon" href="https://github.com/zzic-zzic">
+              Github
+            </a>
         </div>
       </div>
-      
     </div>
   </template>
   
   <script>
+
   </script>
   
   <style>
-  @import "https://fonts.googleapis.com/css?family=Gugi";
-  
-  .infoContainer {
-    text-align: right;
+  @import "https://fonts.googleapis.com/css?family=Amatic+SC:wght@700";
+
+  .navbar .site-name {
+    color: black;
+    font-family: "Amatic SC";
+    font-weight: 900;
+    font-size: 25px;
   }
-  h1 {
+  
+  .main-container {
+    text-align: center;
+    align-items: right
+  }
+
+  .main-header {
     font-family: "Gugi", cursive;
     font-weight: 500;
     border-bottom: 17px solid #ffd816;
     word-break: keep-all;
     font-size: 5rem;
   }
+
+  .icon {
+    background-color: #ffd816;
+    padding: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
   .name {
     font-weight: 900;
     font-size: 2rem;
