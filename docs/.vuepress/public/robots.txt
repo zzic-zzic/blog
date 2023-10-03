@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zzic-zzic.github.io/blog/sitemap.xml

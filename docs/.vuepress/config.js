@@ -1,5 +1,19 @@
 const { description } = require('../../package')
 
+const routes = [
+ // "Guide",
+ // "Vue",
+  "Three"
+];
+
+const createSidebar = () => {
+  const sidebar = {};
+  for (const route of routes) {
+    Object.assign(sidebar, require("../" + route));
+  }
+  return sidebar;
+};
+
 module.exports = {
   title: 'ZZIC ZZIC',
   description: description,
@@ -16,28 +30,20 @@ module.exports = {
     lastUpdated: false,
     logo: '/img/icon.png',
     nav: [
-      {
+     /* {
         text: 'Guide',
-        link: '/guide/',
+        link: '/Guide/',
       },
       {
-        text: 'VUE',
-        link: '/vue/',
-      },
+        text: 'Vue',
+        link: '/Vue/',
+      },*/
       {
-        text: 'TS',
-        link: '/ts/'
-      },
-      {
-        text: 'THREE',
-        link: '/three/'
-      },
-      {
-        text: 'STUDY',
-        link: '/study/'
+        text: 'Three',
+        link: '/Three/'
       }
     ],
-    sidebar: {
+    sidebar: createSidebar()/*{
       '/guide/': [
         {
           title: 'Guide',
@@ -48,11 +54,13 @@ module.exports = {
           ]
         }
       ],
-    }
+    }*/
   },
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
+    '@vuepress/last-updated',
+    ['sitemap', { hostname: "https://zzic-zzic.github.io/blog/"} ]
   ],
   base: "/blog/",
   configureWebpack: {

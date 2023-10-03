@@ -15,5 +15,10 @@
   "license": "MIT",
   "devDependencies": {
     "vuepress": "^1.5.3"
+  },
+  "dependencies": {
+    "@vuepress/plugin-google-analytics": "^1.9.10",
+    "@vuepress/plugin-last-updated": "^1.9.10",
+    "vuepress-plugin-sitemap": "^2.3.1"
   }
 }
