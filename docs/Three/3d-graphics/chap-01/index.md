@@ -14,4 +14,4 @@ tags: ["three"]
 
 # three js ?
 
-<Home/>
+<Demo/>
