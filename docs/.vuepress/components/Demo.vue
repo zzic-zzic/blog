@@ -5,20 +5,23 @@
 </template>
 
 <script setup>
+import { defineProps } from 'vue';
 import { onMounted, ref } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+const props = defineProps({
+    name
+})
+
 onMounted(()=>{
+    console.log(props)
     const container = document.getElementById('dom');
     if(!container)
         return;
-
     
     const width = container.getBoundingClientRect().width;
     const height = container.getBoundingClientRect().height;
-
-    console.log(width, height)
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
