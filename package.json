@@ -19,6 +19,8 @@
   "dependencies": {
     "@vuepress/plugin-google-analytics": "^1.9.10",
     "@vuepress/plugin-last-updated": "^1.9.10",
+    "dat.gui": "^0.7.9",
+    "stats-js": "^1.0.1",
     "three": "^0.157.0",
     "vuepress-plugin-sitemap": "^2.3.1"
   }

@@ -14,5 +14,5 @@ tags: ["three"]
 
 # three js ?
 
-<Demo name="zzic" />
+<three-chap01-Ex01/>
 
