@@ -17,11 +17,17 @@ export class ThreeLayer {
 
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 1, 1000);
-        this.camera.position.set(2,3,20);
+        this.camera.position.set(-30,20,30);
         this.camera.lookAt(0,0,0);
 
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(this.width, this.height);
+
+        this.controller = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controller.addEventListener("change", function(){
+            threeLayers[name].renderFrame();
+        })
+
 
         // stats
         this.stats = new Stats();
@@ -36,14 +42,9 @@ export class ThreeLayer {
         this.gui = new Dat.GUI({autoPlace: false});
         this.container.appendChild(this.gui.domElement);
         const cameraFolder = this.gui.addFolder('Camera');
-        cameraFolder.add(this.camera.position, 'z', 0, 10);
+        cameraFolder.add(this.camera.position, 'z', 0, 100);
         cameraFolder.open();
         
-
-        this.controller = new OrbitControls(this.camera, this.renderer.domElement);
-        this.controller.addEventListener("change", function(){
-            threeLayers[name].renderFrame();
-        })
 
         let axes = new THREE.AxesHelper(1000);
         this.scene.add(axes);
@@ -51,12 +52,13 @@ export class ThreeLayer {
         this.container.appendChild(this.renderer.domElement);
         this.renderFrame();
 
-        window.addEventListener("resize", this.resizeWindow.bind(this));
+
+        document.body.addEventListener("resize", this.resizeWindow.bind(this));
     }
 
     renderFrame() {
         this.renderer.render(this.scene, this.camera);
-        this.stats.update();
+        //this.stats.update();
     }
 
     resizeWindow() {
