@@ -1,13 +1,15 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'three/examples/jsm/libs/stats.module'
-import Dat from 'dat.gui';
+import WebGL from 'three/examples/jsm/capabilities/WebGL.js';
 
 let threeLayers = {};
 
 export class ThreeLayer {
     constructor(name, container) {
         threeLayers[name] = this;
+
+        console.log(WebGL.isWebGLAvailable())
 
         this.name = name;
         this.container = container;
@@ -16,11 +18,13 @@ export class ThreeLayer {
         this.height = container.getBoundingClientRect().height;
 
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 1, 1000);
+        this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.1, 1000);
         this.camera.position.set(-30,20,30);
         this.camera.lookAt(0,0,0);
 
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.setClearColor(0xFFE4C4, 0.5);
         this.renderer.setSize(this.width, this.height);
 
         this.controller = new OrbitControls(this.camera, this.renderer.domElement);
@@ -39,12 +43,7 @@ export class ThreeLayer {
         this.container.appendChild(this.stats.dom);
 
         // dats
-        this.gui = new Dat.GUI({autoPlace: false});
-        this.container.appendChild(this.gui.domElement);
-        const cameraFolder = this.gui.addFolder('Camera');
-        cameraFolder.add(this.camera.position, 'z', 0, 100);
-        cameraFolder.open();
-        
+       // this.gui = new Dat.GUI({autoPlace: false});        
 
         let axes = new THREE.AxesHelper(1000);
         this.scene.add(axes);
@@ -53,12 +52,12 @@ export class ThreeLayer {
         this.renderFrame();
 
 
-        document.body.addEventListener("resize", this.resizeWindow.bind(this));
+        window.addEventListener("resize", this.resizeWindow.bind(this));
     }
 
     renderFrame() {
         this.renderer.render(this.scene, this.camera);
-        //this.stats.update();
+        this.stats.update();
     }
 
     resizeWindow() {

@@ -1,5 +1,5 @@
 ---
-title: 3D 장면 제작2
+title: 2. 준비중
 meta:
   - name: description
     content: 3D 장면 제작2
