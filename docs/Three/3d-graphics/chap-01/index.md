@@ -171,3 +171,5 @@ resizeWindow() {
 ::: tip
 Source: Learn Three.js - By Jos Dirksen
 :::
+
+<Comment />
