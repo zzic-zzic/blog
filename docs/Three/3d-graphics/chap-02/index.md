@@ -24,5 +24,5 @@ tags: ["three"]
 
 
 
-<iframe :src="$withBase('/lecture/cahper-01/index.html')" width="100%" height="350" frameborder="0">
+<iframe :src="$withBase('/three/cahper-01/index.html')" width="100%" height="350" frameborder="0">
 </iframe>
