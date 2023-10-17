@@ -2,7 +2,7 @@ const { description } = require('../../package')
 
 const routes = [
  // "Guide",
- // "Vue",
+  "Vue",
   "Three"
 ];
 
@@ -20,7 +20,8 @@ module.exports = {
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['meta', { name: 'google-site-verification', content: 'n9YufvdIskY_43ONwJe0Iz7yOPP29kk3AuR1digdzE4' }]
   ],
   themeConfig: {
     repo: '',
@@ -33,11 +34,11 @@ module.exports = {
      /* {
         text: 'Guide',
         link: '/Guide/',
-      },
+      },*/
       {
         text: 'Vue',
         link: '/Vue/',
-      },*/
+      },
       {
         text: 'Three',
         link: '/Three/'

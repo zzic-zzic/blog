@@ -63,9 +63,13 @@ onMounted(()=>{
     threeLayer.scene.add(mesh);
 
     const spotLight = new THREE.SpotLight( 0xffffff, 1000 );
-    spotLight.position.set( -10, 50,-10 );
+    spotLight.position.set( 10, 50,-10 );
     spotLight.castShadow = true;
     threeLayer.scene.add(spotLight);
+
+    
+    const spotLightHelper = new THREE.SpotLightHelper( spotLight );
+    threeLayer.scene.add( spotLightHelper );
 
     threeLayer.renderFrame();
 })
