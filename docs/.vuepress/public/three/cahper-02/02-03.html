@@ -74,6 +74,7 @@
     geometry.setFromPoints(vertices);
     //geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
     geometry.setIndex(faces);
+    geometry.computeVertexNormals();
     //geometry.setIndex(new THREE.BufferGeometry(indices, 1));
 
     var materials = [
