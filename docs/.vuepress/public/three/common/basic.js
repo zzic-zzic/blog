@@ -7,7 +7,7 @@ function init() {
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.set(0, 5, 10);
+    camera.position.set(0,30,30);
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -21,9 +21,6 @@ function init() {
         renderer.setSize(innerWidth, innerHeight);
     })
  
-    /*var grid = new THREE.GridHelper(10, 10, "aqua", "gray");
-    scene.add(grid); */
-
     initStats();
 
     var controls = new THREE.OrbitControls(camera, renderer.domElement);

@@ -87,12 +87,15 @@
     gui.add(controls, 'outputObjects');
     gui.add(controls, 'numberOfObjects').listen();
 
+    controls.addCube();
+    controls.addCube();
+    controls.addCube();
+
     function render_() {
         stats.update();
 
         scene.traverse(function (e) {
             if (e instanceof THREE.Mesh && e.name != 'plane') {
-
                 e.rotation.x += controls.rotationSpeed;
                 e.rotation.y += controls.rotationSpeed;
                 e.rotation.z += controls.rotationSpeed;
