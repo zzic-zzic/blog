@@ -72,13 +72,26 @@
 
     let geometry = new THREE.BufferGeometry();
     geometry.setFromPoints(vertices);
+    //geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
     geometry.setIndex(faces);
+    //geometry.setIndex(new THREE.BufferGeometry(indices, 1));
 
-    var material = new THREE.MeshLambertMaterial({color: 0xffffff});
-    var mesh = new THREE.Mesh(geometry, material);
+    var materials = [
+        new THREE.MeshLambertMaterial({opacity: 0.6, color: 0x44ff44, transparent: true}),
+        new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true})
+    ];
 
+
+
+    //var material = new THREE.MeshLambertMaterial({color: 0xffffff});
+    var mesh0 = new THREE.Mesh(geometry, materials[0]);
     // 씬에 메쉬 추가
-    scene.add(mesh);
+    scene.add(mesh0);
+
+    
+    var mesh1 = new THREE.Mesh(geometry, materials[1]);
+    // 씬에 메쉬 추가
+    scene.add(mesh1);
 
     let sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
     let sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
