@@ -13,7 +13,7 @@ meta:
 tags: ["three"]
 ---
 
-# 1. Three.js 로 첫 번째 장면 제작 :cheese:
+# 1. Three.js 로 첫 번째 장면 제작
 **오늘날 자바스크립트로 직접 웹GL을 이용해 3D 애니메이션을 제작하는 것은 매우 복잡한 작업이며 오류가 발생하기 쉽다. Three.js는 이런 일들을 아주 쉽게 해 주는 라이브러리이며, 아래와 같은 특징이 있다.**
 - 간단하고 복잡한 3D Geometry 생성
 - 3D Scene 에서 오브젝트의 애니메이션과 이동하기
@@ -44,7 +44,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 Axes : 객체가 3D 공간에서 렌더링 되는 위치를 확인할 수 있는 디버깅 툴로, X 축은 빨간색, Y 축은 초록색, Z 축은 파란색으로 표시된다.
 ```js
-var axes = new THREE.AxisHelper(20);
+var axes = new THREE.AxesHelper(20);
 scene.add(axes);
 ```
 

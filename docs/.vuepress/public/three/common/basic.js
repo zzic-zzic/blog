@@ -52,6 +52,11 @@ function initStats() {
     return stats;
 }
 
+function addAxis() {
+    var axes = new THREE.AxesHelper(20);
+    scene.add(axes);
+}
+
 function initGui() {
     var gui = new dat.GUI();
 }

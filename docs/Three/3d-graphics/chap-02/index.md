@@ -6,7 +6,7 @@ meta:
   - property: og:title
     content: 3D 장면 제작2
   - property: og:description
-    content: 3D 장면 제작2wwww
+    content: 3D 장면 제작2
   - property: og:url
     content: https://zzic-zzic.github.io/blog/three/3d-graphics/chap-02/
 tags: ["three"]
@@ -195,5 +195,136 @@ Three.js가 제공하는 지오메트리를 사용할 경우 꼭지점과 면들
 
 
 ```js
+// 정점 배열
+let vertices = [
+    new THREE.Vector3(1, 3, 1),
+    new THREE.Vector3(1, 3, -1),
+    new THREE.Vector3(1, -1, 1),
+    new THREE.Vector3(1, -1, -1),
+    new THREE.Vector3(-1, 3, -1),
+    new THREE.Vector3(-1, 3, 1),
+    new THREE.Vector3(-1, -1, -1),
+    new THREE.Vector3(-1, -1, 1)
+];
 
+// 면 배열
+let faces = [
+    0, 2, 1,
+    2, 3, 1,
+    4, 6, 5,
+    6, 7, 5,
+    4, 5, 1,
+    5, 0, 1,
+    7, 6, 2,
+    6, 3, 2,
+    5, 7, 0,
+    7, 2, 0,
+    1, 3, 4,
+    3, 6, 4,
+];
+
+let geometry = new THREE.BufferGeometry();
+geometry.setFromPoints(vertices);
+geometry.setIndex(faces);
+geometry.computeVertexNormals();
+
+var materials = [
+    new THREE.MeshLambertMaterial({opacity: 0.6, color: 0x44ff44, transparent: true}),
+    new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true})
+];
+
+var mesh = new THREE.Mesh(geometry, materials[0]);
+scene.add(mesh);
+mesh.position.y = 1;
+
+var meshWireframe = new THREE.Mesh(geometry, materials[1]);
+scene.add(meshWireframe);
+meshWireframe.position.y = 1;
 ```
+
+<three-chap02-Ex04/>
+
+위 코드는 간단한 정육면체를 만드는 방법을 보여줍니다.
+vertices 배열을 통해 정육면체를 만드는 점들을 정의하고, 이 점들이 모여서 삼각형 면을 만들고 face 배열에 저장됩니다. 
+예를 들어, face 배열의 0,2,1 은 vertices 배열의 0, 2, 1의 점을 이용해 삼각형 면을 만듭니다. 
+전방을 향하는 면은 시계방향, 후방을 향하는 면은 반시계방향으로 꼭지점들을 배열하면 됩니다.
+
+꼭지점과 면을 이용하면 새로운 THREE.BufferGeometry 인스턴스를 생성할 수 있습니다.
+그리고 computeVertexNormals를 호출하면 Three.js 는 각 면에 대한 normal 벡터(법선벡터)를 결정합니다. 
+이 정보를 통해 다양한 조명에 따른 장면에서의 면의 색상을 결정할 수 있습니다.
+
+또한, 컨트롤 패널에 아래 요소를 설정할 수 있도록 했습니다. 
+- 정육면체의 각 꼭지점 위치 (vertice 0~7)
+- 정육면체의 위치 (position)
+- 정육면체의 회전 (rotation)
+ 
+
+::: details 소스코드를 보려면 클릭하세요!
+```js
+var gui = new GUI();
+for(let i=0; i<vertices.length; i++) {
+    let verticesFolder = gui.addFolder('vertices' + i);
+    let vertice = vertices[i];
+    verticesFolder.add(vertice, 'x', -10, 10).onChange(
+        function() {
+            updateMesh(mesh, i)
+        }
+    );
+    verticesFolder.add(vertice, 'y', -10, 10).onChange(
+        function() {
+            updateMesh(mesh, i)
+        }
+    );
+    verticesFolder.add(vertice, 'z', -10, 10).onChange(
+        function() {
+            updateMesh(mesh, i)
+        }
+    );
+    verticesFolder.close();
+}
+let positionFolder = gui.addFolder('position');
+positionFolder.add(mesh.position, 'x', -10, 10).onChange(function() {threeLayer.renderFrame()});
+positionFolder.add(mesh.position, 'y', -4, 20).onChange(function() {threeLayer.renderFrame()});
+positionFolder.add(mesh.position, 'z', -10, 10).onChange(function() {threeLayer.renderFrame()});
+positionFolder.close();
+
+let rotationFolder = gui.addFolder('rotation');
+rotationFolder.add(mesh.rotation, 'x', -10, 10).onChange(function() {threeLayer.renderFrame()});
+rotationFolder.add(mesh.rotation, 'y', -10, 10).onChange(function() {threeLayer.renderFrame()});
+rotationFolder.add(mesh.rotation, 'z', -10, 10).onChange(function() {threeLayer.renderFrame()});
+rotationFolder.close();
+
+function updateMesh(mesh, i) {
+    for(let child of mesh.children) {
+        let positionAttribute = child.geometry.getAttribute( 'position' );
+        positionAttribute.setXYZ(i, vertices[i].x, vertices[i].y, vertices[i].z);
+        //child.geometry.setFromPoints(vertices);
+        positionAttribute.needsUpdate = true; 
+    }
+    threeLayer.renderFrame();
+}
+```
+:::
+
+
+위 예제처럼 position 속성을 직접 설정할 수도 있지만, translate 함수를 사용하면 상대적으로 객체의 이동할 위치를 정의할 수 있습니다. 
+
+|함수/속성|설명|
+|---|---|
+|position|이 속성은 객체의 위치를 부모의 위치에 상대적인 위치로 결정했다. 대부분의 객체의 부모는 THREE.Scene 혹은 THREE.Object3D 객체다.|
+|rotation|이 속성으로는 객체의 회전을 설정할 수 있다. 또한, 각 축별로 회전을 설정할 수 있는 rotateX(), rotateY(), rotateZ() 함수도 있다.|
+|translateX(amount)|이 속성은 객체를 x축으로 amount 만큼 이동한다.|
+|translateY(amount)|이 속성은 객체를 y축으로 amount 만큼 이동한다.|
+|translateZ(amount)|이 속성은 객체를 z축으로 amount 만큼 이동한다.|
+
+<br>
+Chapter 2 에서는 THREE.Scene 의 함수와 속성에 대해서 알아봤습니다. 
+또한, Geometry 생성에 대해서도 알아보고, 커스텀하게 생성하는 방법도 설명되어 있습니다.
+Chapter 3 에서는 다양한 광원의 종류와 동작방법, 그리고 이러한 광원이 어떻게 Material 에 영향을 주는지 알아보겠습니다.
+
+::: tip
+Source: Learn Three.js - By Jos Dirksen
+:::
+
+<br>
+<Comment />

@@ -67,7 +67,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@img': '/docs/Tools/'
+        '@img': '/docs/.vuepress/public/img'
       }
     }
   }

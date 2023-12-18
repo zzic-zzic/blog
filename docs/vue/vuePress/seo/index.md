@@ -38,7 +38,8 @@ module.export = {
 
 이제 <a href="https://search.google.com/search-console">Google Search Console</a> 로 이동하시기 바랍니다. 구글 서치 콘솔(Google Search Console)에서 사이트 등록 후 사이트맵(Sitemap)을 제출하면 됩니다.
 
-<img :src="$withBase('/1.png')" alt="foo">
+<!--<img :src="$withBase('/1.png')" alt="foo">-->
+<img :src="$withBase('/img/1.png')" alt="foo">
 
 - 'URL 접두어' 선택 후 주소에는 본인 사이트 주소를 입력해주세요. (https://zzic-zzic.github.io/blog/)
 
@@ -77,7 +78,7 @@ Sitemap: https://zzic-zzic.github.io/blog/sitemap.xml
 ## sitmeap 가져올 수 없음 에러
 구글 서치 콘솔에 sitemap을 등록했는데 상태가 '가져올 수 없음'으로 나타나고 있습니다. 비슷한 문제를 겪는 사람이 많으며, 가장 흔한 원인은 개설한지 얼마 되지 않기 때문이라고 합니다. 🤔 
 
-<img :src="$withBase('/2.png')" alt="foo">
+<img :src="$withBase('/img/2.png')" alt="foo">
 
 '사이트맵 열기' 버튼을 눌렀을때 정상적으로 사이트맵이 보이면 특별한 이상이 있을 확률은 적기 때문에 한 번 기다려보도록 하겠습니다.
 
